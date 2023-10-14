@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 16:03:46 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:37:07 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,20 @@ int	thread_init(t_table *table, t_set *set)
 	return (1);
 }
 
+int	wait_thread(t_table *table, t_set *set)
+{
+	int i;
+
+	i = 0;
+	while(i < set->nbr)
+	{
+		if (pthread_join(table->philo[i].philo, NULL))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 //TODO simplifier philo  et table.philo en une seul struct table.philo
 int	main(int argc, char **argv)
 {
@@ -69,12 +83,9 @@ int	main(int argc, char **argv)
 		return (write(2, ERR_ARG_RANGE, 41), 2);
 	table.philo = philo;
 	pthread_mutex_init(&table.start, NULL);
-	thread_init(&table, &set);
-	int i = 0;
-	while(i < set.nbr)
-	{
-		pthread_join(table.philo[i].philo, NULL);
-		i++;
-	}
+	if (!thread_init(&table, &set))
+		return (4);
+	if (!wait_thread(&table, &set))
+		return (5);
 	return (0);
 }
