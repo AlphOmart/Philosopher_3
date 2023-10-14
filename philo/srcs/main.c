@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 20:34:36 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 20:43:39 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ void	*routine(void *arg)
 int	main(int argc, char **argv)
 {
 	t_set		set;
-	t_philo		*philo;
 	t_table		_table;
 	int			i;
 
-	philo = NULL;
 	if (argc != 5 && argc != 6)
 		return (write(2, ERR_ARG_NBR, 113), 1);
 	argv++;
-	if (!parsing(&set, &philo, argv))
+	if (!parsing(&set, &_table.philo, argv))
 		return (write(2, ERR_ARG_RANGE, 41), 2);
-	_table.philo = philo;
 	pthread_mutex_init(&_table.start, NULL);
 	i = 0;
 	while (i < set.nbr)
