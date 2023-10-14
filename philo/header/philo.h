@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 19:42:37 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:49:26 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	start;
-	u_int64_t		at_start;
+	u_int64_t		t_start;
 }	t_table;
 
 //---ft_atoll.c
@@ -65,5 +65,6 @@ int			parsing(t_set *set, t_philo **philo, char **arg);
 //---threads.c
 int			thread_init(t_table *table, t_set *set);
 int			wait_thread(t_table *table, t_set *set);
+u_int64_t	timestamp(void);
 
 #endif
