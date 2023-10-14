@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 19:05:57 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:42:37 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <sys/time.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <pthread.h>
@@ -51,6 +52,7 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	start;
+	u_int64_t		at_start;
 }	t_table;
 
 //---ft_atoll.c

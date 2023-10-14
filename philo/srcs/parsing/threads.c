@@ -6,13 +6,22 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 19:15:21 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:52 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdio.h>
 
 void	*routine(void *arg);
+
+u_int64_t	timestamp(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000LL) + (time.tv_usec / 1000LL));
+}
 
 int	thread_init(t_table *table, t_set *set)
 {
@@ -26,6 +35,9 @@ int	thread_init(t_table *table, t_set *set)
 			return (0);
 		i++;
 	}
+	table->at_start = timestamp();
+	sleep (4);
+	printf("Temps actuel (en microsecondes) : %llu\n",timestamp() - table->at_start);
 	pthread_mutex_unlock(&table->start);
 	return (1);
 }
