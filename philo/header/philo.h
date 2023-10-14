@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 18:01:01 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:26:44 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <limits.h>
 # include <pthread.h>
 
-# define ERR_ARG_NBR "\033[1;31m[ERROR]\033[1;33m Usage:<./philo> <nbr of philo> <time to eat> <time to sleep> <time to die>\
-|| <nbr of meal>\n"
+# define ERR_ARG_NBR "\033[1;31m[ERROR]\033[1;33m Usage:<./philo> <nbr of philo> <time to die> <time to eat> <time to sleep>\
+|| [nbr of meal]\n"
 # define ERR_ARG_RANGE "\033[1;31m[ERROR]\033[1;33m Invalid arguments!\n"
 # define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
@@ -58,5 +58,9 @@ long long	ft_atoll(char *nbr);
 
 //---parsing.c
 int			parsing(t_set *set, t_philo **philo, char **arg);
+
+//---threads.c
+int			thread_init(t_table *table, t_set *set);
+int			wait_thread(t_table *table, t_set *set);
 
 #endif

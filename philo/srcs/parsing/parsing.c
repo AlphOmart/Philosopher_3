@@ -6,11 +6,38 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 17:48:03 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:28:45 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	is_number(char **arg);
+static int	is_uint(t_set *set);
+static int	init_philo(t_set *set, t_philo **philo);
+
+int	parsing(t_set *set, t_philo	**philo, char **arg)
+{
+	if (!is_number(arg))
+		return (0);
+	set->nbr = ft_atoll(arg[0]);
+	set->t_die = ft_atoll(arg[1]);
+	set->t_eat = ft_atoll(arg[2]);
+	set->t_sleep = ft_atoll(arg[3]);
+	if (arg[4])
+	{
+		set->meal_max = ft_atoll(arg[4]);
+		if (set->meal_max <= 0)
+			return (0);
+	}
+	else
+		set->meal_max = -1;
+	if (!is_uint(set))
+		return (0);
+	if (!init_philo(set, philo))
+		return (0);
+	return (1);
+}
 
 static int	is_number(char **arg)
 {
@@ -50,7 +77,7 @@ static int	is_uint(t_set *set)
 	return (1);
 }
 
-int	mutex_init(t_set *set, t_philo **philo)
+static int	mutex_init(t_set *set, t_philo **philo)
 {
 	int	i;
 
@@ -70,7 +97,7 @@ int	mutex_init(t_set *set, t_philo **philo)
 	return (1);
 }
 
-int	init_philo(t_set *set, t_philo **philo)
+static int	init_philo(t_set *set, t_philo **philo)
 {
 	int	i;
 
@@ -89,29 +116,6 @@ int	init_philo(t_set *set, t_philo **philo)
 		i++;
 	}
 	if (!mutex_init(set, philo))
-		return (0);
-	return (1);
-}
-
-int	parsing(t_set *set, t_philo	**philo, char **arg)
-{
-	if (!is_number(arg))
-		return (0);
-	set->nbr = ft_atoll(arg[0]);
-	set->t_die = ft_atoll(arg[1]);
-	set->t_eat = ft_atoll(arg[2]);
-	set->t_sleep = ft_atoll(arg[3]);
-	if (arg[4])
-	{
-		set->meal_max = ft_atoll(arg[4]);
-		if (set->meal_max <= 0)
-			return (0);
-	}
-	else
-		set->meal_max = -1;
-	if (!is_uint(set))
-		return (0);
-	if (!init_philo(set, philo))
 		return (0);
 	return (1);
 }
