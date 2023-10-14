@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 14:27:17 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:53:51 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef struct s_philo
 	int				t_sleep;
 	int				meal_max;
 }	t_philo;
+
+typedef struct s_table
+{
+	t_philo			*philo;
+	pthread_mutex_t	start;
+	int				i;
+}	t_table;
+
 //---ft_atoll.c
 int			is_white_space(char c);
 long long	ft_atoll(char *nbr);
