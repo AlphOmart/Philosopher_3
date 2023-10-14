@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 18:49:32 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:07:35 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	*routine(void *arg)
 	t_philo	*this;
 
 	this = (t_philo *) arg;
-	pthread_mutex_lock(this->start);
+	pthread_mutex_lock(&this->table->start);
 	printf("Coucou je suis %i \n", this->id);
-	pthread_mutex_unlock(this->start);
+	pthread_mutex_unlock(&this->table->start);
 	return (NULL);
 }
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 {
 	t_set		set;
 	t_philo		*philo;
-	t_table		table;
+	t_table		_table;
 
 	philo = NULL;
 	if (argc != 5 && argc != 6)
@@ -40,14 +40,14 @@ int	main(int argc, char **argv)
 	argv++;
 	if (!parsing(&set, &philo, argv))
 		return (write(2, ERR_ARG_RANGE, 41), 2);
-	table.philo = philo;
-	pthread_mutex_init(&table.start, NULL);
+	_table.philo = philo;
+	pthread_mutex_init(&_table.start, NULL);
 	int i = 0;
 	while (i < set.nbr)
-		table.philo[i++].start = &table.start;
-	if (!thread_init(&table, &set))
+		_table.philo[i++].table = &_table;
+	if (!thread_init(&_table, &set))
 		return (write(2, ERR_TH_INIT, 46), 4);
-	if (!wait_thread(&table, &set))
+	if (!wait_thread(&_table, &set))
 		return (write(2, ERR_TH_END, 42), 5);
 	return (0);
 }
