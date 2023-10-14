@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 12:35:32 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 14:09:42 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,36 @@ static int	is_uint(t_set *set)
 		return (0);
 	if (INT_MAX < set->t_sleep || set->t_sleep < 1)
 		return (0);
-	if (INT_MAX < set->eat_nbr || set->eat_nbr < -1 || set->eat_nbr == 0)
+	if (INT_MAX < set->meal_max || set->meal_max < -1 || set->meal_max == 0)
 		return (0);
 	return (1);
 }
 
-int	parsing(t_set *set, char **arg)
+#include <stdio.h>
+
+int	init_philo(t_set *set, t_philo **philo)
+{
+	int	i;
+
+	i = 0;
+	*philo = malloc(sizeof(t_philo) * set->nbr);
+	if (!*philo)
+		return (0);
+	while (i < set->nbr)
+	{
+		(*philo)[i].id = i + 1;
+		(*philo)[i].nbr = set->nbr;
+		(*philo)[i].t_die = set->t_die;
+		(*philo)[i].t_eat = set->t_eat;
+		(*philo)[i].t_sleep = set->t_sleep;
+		(*philo)[i].meal_max = set->meal_max;
+		pthread_mutex_init(&(*philo)[i].fork, NULL);
+		i++;
+	}
+	return (1);
+}
+
+int	parsing(t_set *set, t_philo	**philo, char **arg)
 {
 	if (!is_number(arg))
 		return (0);
@@ -60,13 +84,15 @@ int	parsing(t_set *set, char **arg)
 	set->t_sleep = ft_atoll(arg[3]);
 	if (arg[4])
 	{
-		set->eat_nbr = ft_atoll(arg[4]);
-		if (set->eat_nbr <= 0)
+		set->meal_max = ft_atoll(arg[4]);
+		if (set->meal_max <= 0)
 			return (0);
 	}
 	else
-		set->eat_nbr = -1;
+		set->meal_max = -1;
 	if (!is_uint(set))
+		return (0);
+	if (!init_philo(set, philo))
 		return (0);
 	return (1);
 }

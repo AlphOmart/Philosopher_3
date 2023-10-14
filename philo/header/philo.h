@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 12:37:50 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 14:27:17 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <stdlib.h>
 # include <limits.h>
 # include <pthread.h>
 
@@ -27,15 +28,25 @@ typedef struct s_set
 	int	t_die;
 	int	t_eat;
 	int	t_sleep;
-	int	eat_nbr;
+	int	meal_max;
 }	t_set;
 
-
+typedef struct s_philo
+{
+	pthread_t		philo;
+	pthread_mutex_t	fork;
+	int				id;
+	int				nbr;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				meal_max;
+}	t_philo;
 //---ft_atoll.c
 int			is_white_space(char c);
 long long	ft_atoll(char *nbr);
 
 //---parsing.c
-int			parsing(t_set *set, char **arg);
+int			parsing(t_set *set, t_philo **philo, char **arg);
 
 #endif
