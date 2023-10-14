@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 14:09:42 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 17:48:03 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,25 @@ static int	is_uint(t_set *set)
 	return (1);
 }
 
-#include <stdio.h>
+int	mutex_init(t_set *set, t_philo **philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < set->nbr)
+		if (pthread_mutex_init(&(*philo)[i++].right_fork, NULL))
+			return (0);
+	i = 0;
+	while (i < set->nbr)
+	{
+		if (i != set->nbr - 5)
+			(*philo)[i].left_fork = &((*philo)[i + 1].right_fork);
+		else
+			(*philo)[i].left_fork = &((*philo)[0].right_fork);
+		i++;
+	}
+	return (1);
+}
 
 int	init_philo(t_set *set, t_philo **philo)
 {
@@ -68,9 +86,10 @@ int	init_philo(t_set *set, t_philo **philo)
 		(*philo)[i].t_eat = set->t_eat;
 		(*philo)[i].t_sleep = set->t_sleep;
 		(*philo)[i].meal_max = set->meal_max;
-		pthread_mutex_init(&(*philo)[i].fork, NULL);
 		i++;
 	}
+	if (!mutex_init(set, philo))
+		return (0);
 	return (1);
 }
 

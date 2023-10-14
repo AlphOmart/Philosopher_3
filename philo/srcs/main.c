@@ -6,24 +6,20 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 16:37:07 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:02:54 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
-#define ERR_TH_INIT "[ERROR] thread creation failed !"
-
-#include <stdio.h>
-
 
 
 void	*routine(void *arg)
 {
 	t_table	*table;
 	int		i;
-	table = (t_table *) arg;
 
+	table = (t_table *) arg;
 	pthread_mutex_lock(&table->start);
 	i = 0;
 	while (i < table->philo[i].nbr)
@@ -46,25 +42,19 @@ int	thread_init(t_table *table, t_set *set)
 
 	i = 0;
 	while (i < set->nbr)
-	{
-		if (pthread_create(&table->philo[i].philo, NULL, routine, table) != 0)
+		if (pthread_create(&table->philo[i++].philo, NULL, routine, table))
 			return (0);
-		i++;
-	}
 	return (1);
 }
 
 int	wait_thread(t_table *table, t_set *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < set->nbr)
-	{
-		if (pthread_join(table->philo[i].philo, NULL))
+	while (i < set->nbr)
+		if (pthread_join(table->philo[i++].philo, NULL))
 			return (0);
-		i++;
-	}
 	return (1);
 }
 
@@ -84,8 +74,8 @@ int	main(int argc, char **argv)
 	table.philo = philo;
 	pthread_mutex_init(&table.start, NULL);
 	if (!thread_init(&table, &set))
-		return (4);
+		return (write(2, ERR_TH_INIT, 46), 4);
 	if (!wait_thread(&table, &set))
-		return (5);
+		return (write(2, ERR_TH_END, 42), 5);
 	return (0);
 }

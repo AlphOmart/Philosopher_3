@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 15:53:51 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:01:01 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 
 # define ERR_ARG_NBR "\033[1;31m[ERROR]\033[1;33m Usage:<./philo> <nbr of philo> <time to eat> <time to sleep> <time to die>\
 || <nbr of meal>\n"
-# define ERR_ARG_RANGE "\033[1;31m[ERROR]\033[1;33m Invalid arguments\n"
+# define ERR_ARG_RANGE "\033[1;31m[ERROR]\033[1;33m Invalid arguments!\n"
+# define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
+# define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
 
 typedef struct s_set
 {
@@ -34,7 +36,8 @@ typedef struct s_set
 typedef struct s_philo
 {
 	pthread_t		philo;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
 	int				id;
 	int				nbr;
 	int				t_die;
@@ -47,7 +50,6 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	start;
-	int				i;
 }	t_table;
 
 //---ft_atoll.c
