@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 18:26:44 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:47:21 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*start;
 	int				id;
 	int				nbr;
 	int				t_die;
