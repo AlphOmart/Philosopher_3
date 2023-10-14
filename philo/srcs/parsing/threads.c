@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 19:49:22 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 21:47:37 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	thread_init(t_table *table, t_set *set)
 	pthread_mutex_lock(&table->start);
 	while (i < set->nbr)
 	{
-		if (pthread_create(&table->philo[i].philo, NULL, routine, &table->philo[i]))
+		if (pthread_create(&table->philo[i].philo, NULL, \
+				routine, &table->philo[i]))
 			return (0);
 		i++;
 	}
 	table->t_start = timestamp();
+	table->dead = false;
 	pthread_mutex_unlock(&table->start);
 	return (1);
 }

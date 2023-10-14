@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 20:43:39 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:02:11 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ void	*routine(void *arg)
 
 	this = (t_philo *) arg;
 	pthread_mutex_lock(&this->table->start);
-	sleep(4);
-	printf("Coucou je suis %i á :  %lld ms\n", this->id, timestamp() - this->table->t_start);
+	pthread_mutex_unlock(&this->table->start);
+	while (42)
+	{
+		pthread_mutex_lock(&this->table->start);
+		if (this->table->dead)
+			break ;
+		pthread_mutex_unlock(&this->table->start);
+	}
 	pthread_mutex_unlock(&this->table->start);
 	return (NULL);
 }
