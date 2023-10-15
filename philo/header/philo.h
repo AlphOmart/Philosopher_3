@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 20:36:40 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 22:39:35 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ typedef struct s_set
 
 typedef struct s_philo
 {
-	pthread_t		philo;
-	pthread_mutex_t	right_fork;
-	pthread_mutex_t	*left_fork;
-	int				id;
+	pthread_t			philo;
+	pthread_mutex_t		right_fork;
+	pthread_mutex_t		*left_fork;
+	int					id;
 	unsigned long long	nbr;
 	unsigned long long	t_die;
 	unsigned long long	t_eat;
 	unsigned long long	t_sleep;
-	int 				meal_nbr;
+	int					meal_nbr;
 	u_int64_t			last_meal;
-	struct s_table	*table;
+	struct s_table		*table;
 }	t_philo;
 
 typedef struct s_table
