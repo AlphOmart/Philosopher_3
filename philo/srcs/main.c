@@ -6,13 +6,19 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 22:02:11 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 12:15:07 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 
+void	ft_usleep(t_philo *this, int time)
+{
+	(void)this;
+	time *= 1000;
+	usleep(time);
+}
 
 void	*routine(void *arg)
 {
@@ -21,12 +27,29 @@ void	*routine(void *arg)
 	this = (t_philo *) arg;
 	pthread_mutex_lock(&this->table->start);
 	pthread_mutex_unlock(&this->table->start);
+	if (this->id % 2)
+	{
+		printf("%lld %i is thinking\n", timestamp() - this->table->t_start, this->id);
+		ft_usleep(this, this->t_eat);
+	}
 	while (42)
 	{
 		pthread_mutex_lock(&this->table->start);
 		if (this->table->dead)
 			break ;
 		pthread_mutex_unlock(&this->table->start);
+		pthread_mutex_lock(this->left_fork);
+		printf("%lld %i has taken left fork\n", timestamp() - this->table->t_start, this->id);
+		pthread_mutex_lock(&this->right_fork);
+		printf("%lld %i has taken right fork\n", timestamp() - this->table->t_start, this->id);
+		printf("%lld %i is eating\n", timestamp() - this->table->t_start, this->id);
+		this->last_meal = timestamp();
+		ft_usleep(this, this->t_eat);
+		pthread_mutex_unlock(this->left_fork);
+		pthread_mutex_unlock(&this->right_fork);
+		printf("%lld %i is sleeping\n", timestamp() - this->table->t_start, this->id);
+		ft_usleep(this, this->t_sleep);
+		printf("%lld %i is thinking\n", timestamp() - this->table->t_start, this->id);
 	}
 	pthread_mutex_unlock(&this->table->start);
 	return (NULL);

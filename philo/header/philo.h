@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 21:45:04 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 11:52:57 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 	int				t_die;
 	int				t_eat;
 	int				t_sleep;
+	u_int64_t		last_meal;
 	int				meal_max;
 	struct s_table	*table;
 }	t_philo;
