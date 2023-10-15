@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 21:47:37 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:12:48 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ u_int64_t	timestamp(void)
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000LL) + (time.tv_usec / 1000LL));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	thread_init(t_table *table, t_set *set)
@@ -31,6 +31,7 @@ int	thread_init(t_table *table, t_set *set)
 	pthread_mutex_lock(&table->start);
 	while (i < set->nbr)
 	{
+		table->philo[i].last_meal = timestamp();
 		if (pthread_create(&table->philo[i].philo, NULL, \
 				routine, &table->philo[i]))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 11:52:57 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 15:20:47 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include<limits.h>
 # include<pthread.h>
 # include<stdbool.h>
+# include<stdio.h>
 
 # define ERR_ARG_NBR "\033[1;31m[ERROR]\033[1;33m Usage:<./philo> <nbr of philo> <time to die> <time to eat> <time to sleep>\
 || [nbr of meal]\n"
@@ -28,11 +29,11 @@
 
 typedef struct s_set
 {
-	int	nbr;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	meal_max;
+	int		nbr;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		meal_max;
 }	t_set;
 
 typedef struct s_philo
@@ -41,12 +42,12 @@ typedef struct s_philo
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
 	int				id;
-	int				nbr;
-	int				t_die;
-	int				t_eat;
-	int				t_sleep;
-	u_int64_t		last_meal;
-	int				meal_max;
+	unsigned long long	nbr;
+	unsigned long long	t_die;
+	unsigned long long	t_eat;
+	unsigned long long	t_sleep;
+	int 				meal_nbr;
+	u_int64_t			last_meal;
 	struct s_table	*table;
 }	t_philo;
 

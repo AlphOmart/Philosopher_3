@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 12:23:04 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 15:10:31 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int	init_philo(t_set *set, t_philo **philo)
 		(*philo)[i].t_die = set->t_die;
 		(*philo)[i].t_eat = set->t_eat;
 		(*philo)[i].t_sleep = set->t_sleep;
-		(*philo)[i].meal_max = set->meal_max;
+		(*philo)[i].meal_nbr = set->meal_max;
 		i++;
 	}
 	if (!mutex_init(set, philo))

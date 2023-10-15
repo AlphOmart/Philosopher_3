@@ -6,7 +6,8 @@ FLAGS		=	-Wall -Werror -Wextra -pthread -fsanitize=thread
 SRC			=	srcs/main.c \
 				srcs/parsing/ft_atoll.c \
 				srcs/parsing/parsing.c \
-				srcs/parsing/threads.c
+				srcs/parsing/threads.c \
+				srcs/routine/routine.c
 OBJS_DIR	=	.OBJS/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 HEADER_DIR	=	header/
@@ -29,6 +30,7 @@ $(OBJS_DIR):
 				@mkdir -p $(OBJS_DIR)
 				@mkdir -p $(OBJS_DIR)srcs
 				@mkdir -p $(OBJS_DIR)srcs/parsing
+				@mkdir -p $(OBJS_DIR)srcs/routine
 
 clean:
 				@echo "\033[0;31mDeleting philo object...\n"
