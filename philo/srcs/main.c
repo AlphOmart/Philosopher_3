@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 20:41:39 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 22:48:26 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ void	thread_monitoring(t_table *table, t_set *set)
 
 void	ft_free(t_table *table, t_set *set)
 {
-	int	i;
+//	int	i;
 
-	i = -1;
+//	i = -1;
+	(void)set;
 	free(table->philo);
-	while (++i < set->nbr)
-		pthread_mutex_destroy(&table->philo[i].right_fork);
-	pthread_mutex_destroy(&table->manage);
+//	while (++i < set->nbr)
+//		pthread_mutex_destroy(&table->philo[i].right_fork);
+//	pthread_mutex_destroy(&table->manage);
 }
 
 //TODO simplifier philo  et table.philo en une seul struct table.philo

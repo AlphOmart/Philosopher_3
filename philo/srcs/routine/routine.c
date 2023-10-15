@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 22:39:59 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 22:58:26 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_message(t_philo *this, int mess)
 	printf(LINE_SPACING);
 }
 
-void	ft_usleep(t_philo *this, int time)
+void	ft_usleep(t_philo *this, unsigned long long time)
 {
 	(void)this;
 	time *= 1000;
