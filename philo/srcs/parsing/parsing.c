@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/14 18:28:45 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 12:23:04 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	mutex_init(t_set *set, t_philo **philo)
 	i = 0;
 	while (i < set->nbr)
 	{
-		if (i != set->nbr - 5)
+		if (i != set->nbr && set->nbr != 1)
 			(*philo)[i].left_fork = &((*philo)[i + 1].right_fork);
 		else
 			(*philo)[i].left_fork = &((*philo)[0].right_fork);

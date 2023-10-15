@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 12:15:07 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 12:24:30 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	*routine(void *arg)
 	}
 	while (42)
 	{
-		pthread_mutex_lock(&this->table->start);
-		if (this->table->dead)
-			break ;
-		pthread_mutex_unlock(&this->table->start);
 		pthread_mutex_lock(this->left_fork);
 		printf("%lld %i has taken left fork\n", timestamp() - this->table->t_start, this->id);
+		pthread_mutex_lock(&this->table->start);
+		if (this->table->dead || &this->right_fork == this->left_fork)
+			break ;
+		pthread_mutex_unlock(&this->table->start);
 		pthread_mutex_lock(&this->right_fork);
 		printf("%lld %i has taken right fork\n", timestamp() - this->table->t_start, this->id);
 		printf("%lld %i is eating\n", timestamp() - this->table->t_start, this->id);
