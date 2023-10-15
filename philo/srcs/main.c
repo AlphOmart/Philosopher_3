@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 18:13:43 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 19:52:25 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ bool	checker(t_table	*table, t_set *set)
 		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
 			eat_enought++;
 		if (table->philo->t_die < time - philo->last_meal)
-			return (printf("%lld %i died\n", timestamp() - table->t_start, philo->id), 0);
+		{
+			print_message(philo, 4);
+			return (0);
+		}
 		i++;
 	}
 	if (set->nbr <= eat_enought)
@@ -67,6 +70,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < set.nbr)
 		_table.philo[i++].table = &_table;
+	print_message(&_table.philo[i], 5);
 	if (!thread_init(&_table, &set))
 		return (write(2, ERR_TH_INIT, 46), 4);
 	thread_monitoring(&_table, &set);

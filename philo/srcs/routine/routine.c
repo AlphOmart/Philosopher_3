@@ -6,12 +6,34 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 17:50:52 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 19:52:45 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philo.h"
+
+void	print_message(t_philo *this, int mess)
+{
+	if (mess != 5)
+		printf(DEF_PROMT, timestamp() - this->table->t_start, this->id);
+	if (mess == 0)
+		printf("%-36s|\n", FORK_MESS);
+	else if (mess == 1)
+		printf("%-36s|\n", EATING_MESS);
+	else if (mess == 2)
+		printf("%-36s|\n", SLEEP_MESS);
+	else if (mess == 3)
+		printf("%-36s|\n", THINKING_MESS);
+	else if (mess == 4)
+		printf("%-38s|\n", DIED_MESS);
+	else if (mess == 5)
+	{
+		printf(LINE_SPACING);
+		printf(PROMPT_MENU);
+	}
+	printf(LINE_SPACING);
+}
 
 void	ft_usleep(t_philo *this, int time)
 {
@@ -26,19 +48,19 @@ void	action(t_philo *this, int action)
 	if (this->table->dead == true)
 		return (pthread_mutex_unlock(&this->table->start), (void) NULL);
 	if (action == 0)
-		printf("%lld %i has taken a fork\n", timestamp() - this->table->t_start, this->id);
+		print_message(this, action);
 	else if (action == 1)
 	{
-		printf("%lld %i is eating\n", timestamp() - this->table->t_start, this->id);
+		print_message(this, action);
 		this->last_meal = timestamp();
 	}
 	else if (action == 2)
 	{
-		printf("%lld %i is sleeping\n", timestamp() - this->table->t_start, this->id);
+		print_message(this, action);
 		this->meal_nbr += 1;
 	}
 	else if (action == 3)
-		printf("%lld %i is thinking\n", timestamp() - this->table->t_start, this->id);
+		print_message(this, 3);
 	pthread_mutex_unlock(&this->table->start);
 }
 
