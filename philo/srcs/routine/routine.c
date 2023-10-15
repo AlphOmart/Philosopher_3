@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 16:12:57 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 17:50:52 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	action(t_philo *this, int action)
 	else if (action == 2)
 	{
 		printf("%lld %i is sleeping\n", timestamp() - this->table->t_start, this->id);
-		this->meal_nbr++;
+		this->meal_nbr += 1;
 	}
 	else if (action == 3)
 		printf("%lld %i is thinking\n", timestamp() - this->table->t_start, this->id);

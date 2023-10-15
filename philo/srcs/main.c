@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 16:13:56 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 18:05:48 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ bool	checker(t_table	*table, t_set *set)
 {
 	t_philo		*philo;
 	u_int64_t	time;
-	int			meal_count;
+	int			eat_enought;
 	int		i;
 
 	i = 0;
 	time = timestamp();
-	(void)meal_count;
-	(void)table;
-	(void)time;
-	(void)set;
-	(void)philo;
+	eat_enought = 0;
 	while (i < set->nbr)
 	{
 		philo = &table->philo[i];
+		if (set->meal_max <= philo->meal_nbr)
+			eat_enought++;
 		if (table->philo->t_die < time - philo->last_meal)
 			return (printf("%lld %i died\n", timestamp() - table->t_start, philo->id), 0);
 		i++;
 	}
+	if (set->nbr <= eat_enought)
+		return (0);
 	return (1);
 }
 
