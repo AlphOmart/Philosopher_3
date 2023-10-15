@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 16:07:12 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:37:30 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	thread_init(t_table *table, t_set *set)
 	int	i;
 
 	i = 0;
-	pthread_mutex_lock(&table->start);
+	pthread_mutex_lock(&table->manage);
 	while (i < set->nbr)
 	{
 		table->philo[i].last_meal = timestamp();
@@ -39,7 +39,7 @@ int	thread_init(t_table *table, t_set *set)
 	}
 	table->t_start = timestamp();
 	table->dead = false;
-	pthread_mutex_unlock(&table->start);
+	pthread_mutex_unlock(&table->manage);
 	return (1);
 }
 

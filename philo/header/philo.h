@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 19:55:54 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:36:40 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_philo
 typedef struct s_table
 {
 	t_philo			*philo;
-	pthread_mutex_t	start;
+	pthread_mutex_t	manage;
 	bool			dead;
 	u_int64_t		t_start;
 }	t_table;

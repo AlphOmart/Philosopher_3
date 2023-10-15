@@ -44,9 +44,9 @@ void	ft_usleep(t_philo *this, int time)
 
 void	action(t_philo *this, int action)
 {
-	pthread_mutex_lock(&this->table->start);
+	pthread_mutex_lock(&this->table->manage);
 	if (this->table->dead == true)
-		return (pthread_mutex_unlock(&this->table->start), (void) NULL);
+		return (pthread_mutex_unlock(&this->table->manage), (void) NULL);
 	if (action == 0)
 		print_message(this, action);
 	else if (action == 1)
@@ -61,17 +61,17 @@ void	action(t_philo *this, int action)
 	}
 	else if (action == 3)
 		print_message(this, 3);
-	pthread_mutex_unlock(&this->table->start);
+	pthread_mutex_unlock(&this->table->manage);
 }
 
 bool	do_routine(t_philo *this)
 {
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
-	pthread_mutex_lock(&this->table->start);
+	pthread_mutex_lock(&this->table->manage);
 	if (this->table->dead || &this->right_fork == this->left_fork)
 		return (false);
-	pthread_mutex_unlock(&this->table->start);
+	pthread_mutex_unlock(&this->table->manage);
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
 	action(this, 1);
@@ -89,8 +89,8 @@ void	*routine(void *arg)
 	t_philo	*this;
 
 	this = (t_philo *) arg;
-	pthread_mutex_lock(&this->table->start);
-	pthread_mutex_unlock(&this->table->start);
+	pthread_mutex_lock(&this->table->manage);
+	pthread_mutex_unlock(&this->table->manage);
 	if (this->id % 2)
 	{
 		action(this, 3);
@@ -99,6 +99,6 @@ void	*routine(void *arg)
 	while (42)
 		if (!do_routine(this))
 			break ;
-	pthread_mutex_unlock(&this->table->start);
+	pthread_mutex_unlock(&this->table->manage);
 	return (NULL);
 }

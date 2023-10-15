@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 19:52:25 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/15 20:41:39 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	checker(t_table	*table, t_set *set)
 	t_philo		*philo;
 	u_int64_t	time;
 	int			eat_enought;
-	int		i;
+	int			i;
 
 	i = 0;
 	time = timestamp();
@@ -43,15 +43,26 @@ void	thread_monitoring(t_table *table, t_set *set)
 {
 	while (42)
 	{
-		pthread_mutex_lock(&table->start);
+		pthread_mutex_lock(&table->manage);
 		if (!checker(table, set))
 		{
 			table->dead = true;
-			pthread_mutex_unlock(&table->start);
+			pthread_mutex_unlock(&table->manage);
 			break ;
 		}
-		pthread_mutex_unlock(&table->start);
+		pthread_mutex_unlock(&table->manage);
 	}
+}
+
+void	ft_free(t_table *table, t_set *set)
+{
+	int	i;
+
+	i = -1;
+	free(table->philo);
+	while (++i < set->nbr)
+		pthread_mutex_destroy(&table->philo[i].right_fork);
+	pthread_mutex_destroy(&table->manage);
 }
 
 //TODO simplifier philo  et table.philo en une seul struct table.philo
@@ -66,7 +77,7 @@ int	main(int argc, char **argv)
 	argv++;
 	if (!parsing(&set, &_table.philo, argv))
 		return (write(2, ERR_ARG_RANGE, 41), 2);
-	pthread_mutex_init(&_table.start, NULL);
+	pthread_mutex_init(&_table.manage, NULL);
 	i = 0;
 	while (i < set.nbr)
 		_table.philo[i++].table = &_table;
@@ -76,6 +87,6 @@ int	main(int argc, char **argv)
 	thread_monitoring(&_table, &set);
 	if (!wait_thread(&_table, &set))
 		return (write(2, ERR_TH_END, 42), 5);
-	free(_table.philo);
+	ft_free(&_table, &set);
 	return (0);
 }
