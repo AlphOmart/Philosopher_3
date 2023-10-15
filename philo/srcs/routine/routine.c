@@ -69,14 +69,14 @@ bool	do_routine(t_philo *this)
 	action(this, 0);
 	pthread_mutex_lock(&this->table->manage);
 	if (this->table->dead || &this->right_fork == this->left_fork)
-		return (false);
+		return (pthread_mutex_unlock(this->left_fork), false);
 	pthread_mutex_unlock(&this->table->manage);
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
 	action(this, 1);
 	ft_usleep(this, this->t_eat);
-	pthread_mutex_unlock(this->left_fork);
 	pthread_mutex_unlock(&this->right_fork);
+	pthread_mutex_unlock(this->left_fork);
 	action(this, 2);
 	ft_usleep(this, this->t_sleep);
 	action(this, 3);

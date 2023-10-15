@@ -1,7 +1,7 @@
 #---COMMON_VAR-----------------------------------
 NAME		=	philo
 CC			=	cc
-FLAGS		=	-Wall -Werror -Wextra -pthread -fsanitize=address -g3
+FLAGS		=	-Wall -Werror -Wextra -pthread -fsanitize=thread -g3
 #---PHILO_VAR----------------------------------
 SRC			=	srcs/main.c \
 				srcs/parsing/ft_atoll.c \

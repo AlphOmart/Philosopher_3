@@ -28,7 +28,7 @@
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
 # define LINE_SPACING "|----------|-----|-----------------------|\n"
 # define PROMPT_MENU  "| time(ms) | id  |        actions        |\n"
-# define DEF_PROMT "|\033[1;33m%-10lld\033[0m| \033[1;35m%-4i\033[0m|"
+# define DEF_PROMT "|\033[1;33m%-10ld\033[0m| \033[1;35m%-4i\033[0m|"
 # define FORK_MESS "\033[1;36m has taken a fork !\033[0m \U0001F944"
 # define EATING_MESS "\033[1;34m is eating !\033[0m \U0001F35D"
 # define SLEEP_MESS "\033[1;32m is sleeping !\033[0m \U0001F4A4"
