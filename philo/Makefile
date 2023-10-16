@@ -1,13 +1,14 @@
 #---COMMON_VAR-----------------------------------
 NAME		=	philo
 CC			=	cc
-FLAGS		=	-Wall -Werror -Wextra -pthread -fsanitize=thread -g3
+FLAGS		=	-Wall -Werror -Wextra -pthread  #-g3 -fsanitize=thread
 #---PHILO_VAR----------------------------------
 SRC			=	srcs/main.c \
 				srcs/parsing/ft_atoll.c \
 				srcs/parsing/parsing.c \
 				srcs/parsing/threads.c \
-				srcs/routine/routine.c
+				srcs/routine/routine.c \
+				srcs/routine/action.c
 OBJS_DIR	=	.OBJS/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 HEADER_DIR	=	header/

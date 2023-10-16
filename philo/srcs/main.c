@@ -56,14 +56,13 @@ void	thread_monitoring(t_table *table, t_set *set)
 
 void	ft_free(t_table *table, t_set *set)
 {
-//	int	i;
+	int	i;
 
-//	i = -1;
-	(void)set;
+	i = -1;
+	while (++i < set->nbr)
+		pthread_mutex_destroy(&table->philo[i].right_fork);
+	pthread_mutex_destroy(&table->manage);
 	free(table->philo);
-//	while (++i < set->nbr)
-//		pthread_mutex_destroy(&table->philo[i].right_fork);
-//	pthread_mutex_destroy(&table->manage);
 }
 
 //TODO simplifier philo  et table.philo en une seul struct table.philo

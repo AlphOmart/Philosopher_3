@@ -13,27 +13,26 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include<unistd.h>
-# include<sys/time.h>
-# include<stdlib.h>
-# include<limits.h>
-# include<pthread.h>
-# include<stdbool.h>
-# include<stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
 
 # define ERR_ARG_NBR "\033[1;31m[ERROR]\033[1;33m Usage:<./philo> <nbr of philo> <time to die> <time to eat> <time to sleep>\
 || [nbr of meal]\n"
 # define ERR_ARG_RANGE "\033[1;31m[ERROR]\033[1;33m Invalid arguments!\n"
 # define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
-# define LINE_SPACING "|----------|-----|-----------------------|\n"
-# define PROMPT_MENU  "| time(ms) | id  |        actions        |\n"
-# define DEF_PROMT "|\033[1;33m%-10ld\033[0m| \033[1;35m%-4i\033[0m|"
-# define FORK_MESS "\033[1;36m has taken a fork !\033[0m \U0001F944"
-# define EATING_MESS "\033[1;34m is eating !\033[0m \U0001F35D"
-# define SLEEP_MESS "\033[1;32m is sleeping !\033[0m \U0001F4A4"
-# define THINKING_MESS "\033[1;31m is thinking !\033[0m \U0001F4AD"
-# define DIED_MESS "\033[0;90mdied !\033[0m ☠\uFE0F"
+
+# define DEF_PROMT "%ld %i "
+# define FORK_MESS "has taken a fork"
+# define EATING_MESS " is eating"
+# define SLEEP_MESS "is sleeping"
+# define THINKING_MESS "is thinking"
+# define DIED_MESS "died"
 
 typedef struct s_set
 {
@@ -50,10 +49,11 @@ typedef struct s_philo
 	pthread_mutex_t		right_fork;
 	pthread_mutex_t		*left_fork;
 	int					id;
-	unsigned long long	nbr;
+	int					nbr;
 	unsigned long long	t_die;
 	unsigned long long	t_eat;
 	unsigned long long	t_sleep;
+	unsigned long long	t_think;
 	int					meal_nbr;
 	u_int64_t			last_meal;
 	struct s_table		*table;
@@ -79,6 +79,8 @@ int			thread_init(t_table *table, t_set *set);
 int			wait_thread(t_table *table, t_set *set);
 u_int64_t	timestamp(void);
 
-//---routine.c
+//---action.c
 void		print_message(t_philo *this, int mess);
+void		ft_usleep(t_philo *this, unsigned long long time);
+void		action(t_philo *this, int action);
 #endif
