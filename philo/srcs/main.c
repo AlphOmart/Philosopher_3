@@ -6,40 +6,37 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 22:48:26 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/16 23:34:59 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	checker(t_table	*table, t_set *set)
+static bool	checker(t_table	*table, t_set *set)
 {
 	t_philo		*philo;
-	u_int64_t	time;
 	int			eat_enought;
 	int			i;
 
-	i = 0;
-	time = timestamp();
+	i = -1;
 	eat_enought = 0;
-	while (i < set->nbr)
+	while (++i < set->nbr)
 	{
 		philo = &table->philo[i];
-		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
-			eat_enought++;
-		if (table->philo->t_die < time - philo->last_meal)
+		if (table->philo->t_die < timestamp() - philo->last_meal)
 		{
-			print_message(philo, 4);
+			printf(DEF_PROMT"%s\n", timestamp() - philo->table->t_start, philo->id , DIED_MESS);
 			return (0);
 		}
-		i++;
+		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
+			eat_enought++;
 	}
 	if (set->nbr <= eat_enought)
 		return (0);
 	return (1);
 }
 
-void	thread_monitoring(t_table *table, t_set *set)
+static void	thread_monitoring(t_table *table, t_set *set)
 {
 	while (42)
 	{
@@ -54,7 +51,7 @@ void	thread_monitoring(t_table *table, t_set *set)
 	}
 }
 
-void	ft_free(t_table *table, t_set *set)
+static void	ft_free(t_table *table, t_set *set)
 {
 	int	i;
 
@@ -65,7 +62,6 @@ void	ft_free(t_table *table, t_set *set)
 	free(table->philo);
 }
 
-//TODO simplifier philo  et table.philo en une seul struct table.philo
 int	main(int argc, char **argv)
 {
 	t_set		set;
@@ -81,7 +77,6 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < set.nbr)
 		_table.philo[i++].table = &_table;
-	print_message(&_table.philo[i], 5);
 	if (!thread_init(&_table, &set))
 		return (write(2, ERR_TH_INIT, 46), 4);
 	thread_monitoring(&_table, &set);

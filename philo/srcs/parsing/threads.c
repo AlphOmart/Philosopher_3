@@ -6,14 +6,11 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 20:37:30 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/16 23:22:46 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
-
-void	*routine(void *arg);
 
 u_int64_t	timestamp(void)
 {
@@ -37,7 +34,6 @@ int	thread_init(t_table *table, t_set *set)
 			return (0);
 		i++;
 	}
-	table->t_start = timestamp();
 	table->dead = false;
 	pthread_mutex_unlock(&table->manage);
 	return (1);

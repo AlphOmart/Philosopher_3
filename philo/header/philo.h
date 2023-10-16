@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/15 22:48:42 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/16 23:32:32 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
 
-# define DEF_PROMT "%ld %i "
+# define DEF_PROMT "%lld %i "
 # define FORK_MESS "has taken a fork"
-# define EATING_MESS " is eating"
+# define EATING_MESS "is eating"
 # define SLEEP_MESS "is sleeping"
 # define THINKING_MESS "is thinking"
 # define DIED_MESS "died"
@@ -50,10 +50,10 @@ typedef struct s_philo
 	pthread_mutex_t		*left_fork;
 	int					id;
 	int					nbr;
-	unsigned long long	t_die;
-	unsigned long long	t_eat;
-	unsigned long long	t_sleep;
-	unsigned long long	t_think;
+	uint64_t			t_die;
+	uint64_t			t_eat;
+	uint64_t			t_sleep;
+	uint64_t			t_think;
 	int					meal_nbr;
 	u_int64_t			last_meal;
 	struct s_table		*table;
@@ -79,8 +79,9 @@ int			thread_init(t_table *table, t_set *set);
 int			wait_thread(t_table *table, t_set *set);
 u_int64_t	timestamp(void);
 
+//---routine.c
+void		*routine(void *arg);
+
 //---action.c
-void		print_message(t_philo *this, int mess);
-void		ft_usleep(t_philo *this, unsigned long long time);
-void		action(t_philo *this, int action);
+void		ft_usleep(uint64_t time);
 #endif
