@@ -55,7 +55,7 @@ typedef struct s_philo
 	int_fast64_t		t_sleep;
 	int_fast64_t		t_think;
 	int					meal_nbr;
-	int_fast64_t		last_meal;
+	uint_fast64_t		last_meal;
 	struct s_table		*table;
 }	t_philo;
 
