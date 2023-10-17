@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/16 23:34:59 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:00:03 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,31 @@
 
 static bool	checker(t_table	*table, t_set *set)
 {
-	t_philo		*philo;
-	int			eat_enought;
+	t_philo		philo;
+	int			enought;
 	int			i;
 
 	i = -1;
-	eat_enought = 0;
+	enought = 0;
 	while (++i < set->nbr)
 	{
-		philo = &table->philo[i];
-		if (table->philo->t_die < timestamp() - philo->last_meal)
+		pthread_mutex_lock(&table->manage);
+			philo = table->philo[i];
+
+		if ((uint_fast64_t)set->t_die + 5 < timestamp() - philo.last_meal)
 		{
-			printf(DEF_PROMT"%s\n", timestamp() - philo->table->t_start, philo->id , DIED_MESS);
+			printf(DEF_PROMT"%s\n", timestamp() - \
+					table->t_start, philo.id, DIED_MESS);
+			pthread_mutex_unlock(&table->manage);
 			return (0);
 		}
-		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
-			eat_enought++;
+		pthread_mutex_unlock(&table->manage);
+		if (set->meal_max > 0 && set->meal_max <= philo.meal_nbr)
+			enought++;
 	}
-	if (set->nbr <= eat_enought)
+	if (set->nbr <= enought)
 		return (0);
+
 	return (1);
 }
 
@@ -40,9 +46,9 @@ static void	thread_monitoring(t_table *table, t_set *set)
 {
 	while (42)
 	{
-		pthread_mutex_lock(&table->manage);
 		if (!checker(table, set))
 		{
+			pthread_mutex_lock(&table->manage);
 			table->dead = true;
 			pthread_mutex_unlock(&table->manage);
 			break ;

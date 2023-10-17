@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/16 23:38:43 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 11:54:58 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	action(t_philo *this, int action)
 		printf(DEF_PROMT"%s\n", timestamp() - \
 				this->table->t_start, this->id, SLEEP_MESS);
 	}
-	else if (action == 3)
+	else
 		printf(DEF_PROMT"%s\n", timestamp() - \
 				this->table->t_start, this->id, THINKING_MESS);
 	pthread_mutex_unlock(&this->table->manage);
@@ -50,10 +50,10 @@ static void	base_rout(t_philo *this)
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
 	action(this, 1);
+	ft_usleep(this->t_eat - 1);
 	this->last_meal = timestamp();
-	ft_usleep(this->t_eat);
-	pthread_mutex_unlock(&this->right_fork);
 	pthread_mutex_unlock(this->left_fork);
+	pthread_mutex_unlock(&this->right_fork);
 }
 
 static void	reverse_root(t_philo *this)
@@ -62,25 +62,25 @@ static void	reverse_root(t_philo *this)
 	action(this, 0);
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
-	this->last_meal = timestamp();
 	action(this, 1);
-	ft_usleep(this->t_eat);
-	pthread_mutex_unlock(this->left_fork);
+	ft_usleep(this->t_eat - 1);
+	this->last_meal = timestamp();
 	pthread_mutex_unlock(&this->right_fork);
+	pthread_mutex_unlock(this->left_fork);
 }
 
 static void	do_routine(t_philo *this)
 {
 	if (this->id % 2 == 0)
 	{
-		action(this, 3);
-		ft_usleep(10);
 		base_rout(this);
 	}
 	else
 		reverse_root(this);
 	action(this, 2);
 	ft_usleep(this->t_sleep);
+	action(this, 3);
+	ft_usleep(this->t_think);
 }
 
 void	*routine(void *arg)
@@ -91,8 +91,12 @@ void	*routine(void *arg)
 	if (this->nbr == 1)
 		return (solo_routine(this), NULL);
 	pthread_mutex_lock(&this->table->manage);
-	this->table->t_start = timestamp();
 	pthread_mutex_unlock(&this->table->manage);
+	if (this->id % 2 == 0)
+	{
+		action(this, 3);
+		ft_usleep(10);
+	}
 	while (42)
 	{
 		do_routine(this);

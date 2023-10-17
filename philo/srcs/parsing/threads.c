@@ -6,13 +6,13 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/16 23:22:46 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:01:38 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-u_int64_t	timestamp(void)
+uint_fast64_t	timestamp(void)
 {
 	struct timeval	time;
 
@@ -35,6 +35,7 @@ int	thread_init(t_table *table, t_set *set)
 		i++;
 	}
 	table->dead = false;
+	table->t_start = timestamp();
 	pthread_mutex_unlock(&table->manage);
 	return (1);
 }

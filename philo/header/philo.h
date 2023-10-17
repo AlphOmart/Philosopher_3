@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/16 23:32:32 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:01:25 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 
 typedef struct s_set
 {
-	int		nbr;
-	int		t_die;
-	int		t_eat;
-	int		t_sleep;
-	int		meal_max;
+	int 	nbr;
+	int_fast64_t		t_die;
+	int_fast64_t		t_eat;
+	int_fast64_t	t_sleep;
+	int_fast64_t	meal_max;
 }	t_set;
 
 typedef struct s_philo
@@ -50,12 +50,12 @@ typedef struct s_philo
 	pthread_mutex_t		*left_fork;
 	int					id;
 	int					nbr;
-	uint64_t			t_die;
-	uint64_t			t_eat;
-	uint64_t			t_sleep;
-	uint64_t			t_think;
+	int_fast64_t		t_die;
+	int_fast64_t		t_eat;
+	int_fast64_t		t_sleep;
+	int_fast64_t		t_think;
 	int					meal_nbr;
-	u_int64_t			last_meal;
+	int_fast64_t		last_meal;
 	struct s_table		*table;
 }	t_philo;
 
@@ -64,7 +64,7 @@ typedef struct s_table
 	t_philo			*philo;
 	pthread_mutex_t	manage;
 	bool			dead;
-	u_int64_t		t_start;
+	uint_fast64_t		t_start;
 }	t_table;
 
 //---ft_atoll.c
@@ -77,11 +77,11 @@ int			parsing(t_set *set, t_philo **philo, char **arg);
 //---threads.c
 int			thread_init(t_table *table, t_set *set);
 int			wait_thread(t_table *table, t_set *set);
-u_int64_t	timestamp(void);
+uint_fast64_t	timestamp(void);
 
 //---routine.c
 void		*routine(void *arg);
 
 //---action.c
-void		ft_usleep(uint64_t time);
+void		ft_usleep(uint_fast64_t time);
 #endif
