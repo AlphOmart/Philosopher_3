@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 13:00:03 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:08:33 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	checker(t_table	*table, t_set *set)
 		pthread_mutex_lock(&table->manage);
 			philo = table->philo[i];
 
-		if ((uint_fast64_t)set->t_die + 5 < timestamp() - philo.last_meal)
+		if ((uint_fast64_t)set->t_die < timestamp() - philo.last_meal)
 		{
 			printf(DEF_PROMT"%s\n", timestamp() - \
 					table->t_start, philo.id, DIED_MESS);
