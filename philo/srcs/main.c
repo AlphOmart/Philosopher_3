@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 22:45:05 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:59:35 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	checker(t_table	*table, t_set *set)
 {
-	t_philo		philo;
+	t_philo		*philo;
 	int			enought;
 	int			i;
 
@@ -23,14 +23,14 @@ static bool	checker(t_table	*table, t_set *set)
 	while (++i < set->nbr)
 	{
 
-			philo = table->philo[i];
-		if ((uint_fast64_t)set->t_die < timestamp() - philo.last_meal)
+		philo = &table->philo[i];
+		if ((uint_fast64_t)set->t_die <= timestamp() - philo->last_meal)
 		{
 			printf(DEF_PROMT"%s\n", timestamp() - \
-					philo.t_start, philo.id, DIED_MESS);
+					philo->t_start, philo->id, DIED_MESS);
 			return (0);
 		}
-		if (set->meal_max > 0 && set->meal_max <= philo.meal_nbr)
+		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
 			enought++;
 	}
 	if (set->nbr <= enought)
