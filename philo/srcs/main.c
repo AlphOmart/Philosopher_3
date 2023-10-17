@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 15:30:53 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:12:11 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	thread_monitoring(t_table *table, t_set *set)
 			pthread_mutex_unlock(&table->manage);
 			break ;
 		}
-		pthread_mutex_unlock(&table->manage);
 	}
 }
 
