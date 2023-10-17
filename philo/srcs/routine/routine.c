@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 15:36:06 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:42:20 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	*routine(void *arg)
 	if (this->nbr == 1)
 		return (solo_routine(this), NULL);
 	pthread_mutex_lock(&this->table->manage);
+	this->t_start = timestamp();
 	pthread_mutex_unlock(&this->table->manage);
 	if (this->id % 2 == 0)
 	{

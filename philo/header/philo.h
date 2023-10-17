@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 13:01:25 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 22:41:47 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 	int_fast64_t		t_think;
 	int					meal_nbr;
 	uint_fast64_t		last_meal;
+	uint_fast64_t		t_start;
 	struct s_table		*table;
 }	t_philo;
 
@@ -65,7 +66,6 @@ typedef struct s_table
 	t_philo			*philo;
 	pthread_mutex_t	manage;
 	bool			dead;
-	uint_fast64_t		t_start;
 }	t_table;
 
 //---ft_atoll.c

@@ -36,9 +36,10 @@ int	thread_init(t_table *table, t_set *set)
 	}
 	table->dead = false;
 	table->t_start = timestamp();
+	table->t_start = timestamp();
 	pthread_mutex_unlock(&table->manage);
 	pthread_mutex_lock(&table->manage);
-	table->t_start = timestamp();
+
 	pthread_mutex_unlock(&table->manage);
 	return (1);
 }
