@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 11:54:58 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:31:34 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ static void	base_rout(t_philo *this)
 	action(this, 0);
 	action(this, 1);
 	ft_usleep(this->t_eat - 1);
+	pthread_mutex_lock(&this->table->manage);
 	this->last_meal = timestamp();
+	pthread_mutex_unlock(&this->table->manage);
 	pthread_mutex_unlock(this->left_fork);
 	pthread_mutex_unlock(&this->right_fork);
 }
