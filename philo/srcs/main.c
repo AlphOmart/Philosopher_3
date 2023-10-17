@@ -22,17 +22,14 @@ static bool	checker(t_table	*table, t_set *set)
 	enought = 0;
 	while (++i < set->nbr)
 	{
-		pthread_mutex_lock(&table->manage);
-			philo = table->philo[i];
 
+			philo = table->philo[i];
 		if ((uint_fast64_t)set->t_die < timestamp() - philo.last_meal)
 		{
 			printf(DEF_PROMT"%s\n", timestamp() - \
 					table->t_start, philo.id, DIED_MESS);
-			pthread_mutex_unlock(&table->manage);
 			return (0);
 		}
-		pthread_mutex_unlock(&table->manage);
 		if (set->meal_max > 0 && set->meal_max <= philo.meal_nbr)
 			enought++;
 	}
@@ -46,13 +43,14 @@ static void	thread_monitoring(t_table *table, t_set *set)
 {
 	while (42)
 	{
+		pthread_mutex_lock(&table->manage);
 		if (!checker(table, set))
 		{
-			pthread_mutex_lock(&table->manage);
 			table->dead = true;
 			pthread_mutex_unlock(&table->manage);
 			break ;
 		}
+		pthread_mutex_unlock(&table->manage);
 	}
 }
 

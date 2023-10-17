@@ -50,7 +50,7 @@ static void	base_rout(t_philo *this)
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
 	action(this, 1);
-	ft_usleep(this->t_eat - 1);
+	ft_usleep(this->t_eat);
 	pthread_mutex_lock(&this->table->manage);
 	this->last_meal = timestamp();
 	pthread_mutex_unlock(&this->table->manage);
@@ -65,7 +65,7 @@ static void	reverse_root(t_philo *this)
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
 	action(this, 1);
-	ft_usleep(this->t_eat - 1);
+	ft_usleep(this->t_eat);
 	pthread_mutex_lock(&this->table->manage);
 	this->last_meal = timestamp();
 	pthread_mutex_unlock(&this->table->manage);

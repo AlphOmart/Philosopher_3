@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <sys/time.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <pthread.h>
@@ -27,7 +28,7 @@
 # define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
 
-# define DEF_PROMT "%lld %i "
+# define DEF_PROMT "%ld %i "
 # define FORK_MESS "has taken a fork"
 # define EATING_MESS "is eating"
 # define SLEEP_MESS "is sleeping"
