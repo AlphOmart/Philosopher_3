@@ -19,21 +19,21 @@ static void	action(t_philo *this, int action)
 		return (pthread_mutex_unlock(&this->table->manage), (void) NULL);
 	if (action == 0)
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->table->t_start, this->id, FORK_MESS);
+				this->t_start, this->id, FORK_MESS);
 	else if (action == 1)
 	{
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->table->t_start, this->id, EATING_MESS);
+				this->t_start, this->id, EATING_MESS);
 	}
 	else if (action == 2)
 	{
 		this->meal_nbr += 1;
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->table->t_start, this->id, SLEEP_MESS);
+				this->t_start, this->id, SLEEP_MESS);
 	}
 	else
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->table->t_start, this->id, THINKING_MESS);
+				this->t_start, this->id, THINKING_MESS);
 	pthread_mutex_unlock(&this->table->manage);
 }
 
