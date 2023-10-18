@@ -24,7 +24,7 @@ static bool	checker(t_table	*table, t_set *set)
 	{
 
 		philo = &table->philo[i];
-		if ((uint_fast64_t)set->t_die <= timestamp() - philo->last_meal)
+		if ((uint_fast64_t)set->t_die < timestamp() - philo->last_meal)
 		{
 			printf(DEF_PROMT"%s\n", timestamp() - \
 					philo->t_start, philo->id, DIED_MESS);

@@ -75,7 +75,7 @@ static void	reverse_root(t_philo *this)
 
 static void	do_routine(t_philo *this)
 {
-	if (this->id % 2 == 0)
+	if (this->id % 2 == 1)
 	{
 		base_rout(this);
 	}
@@ -97,7 +97,7 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&this->table->manage);
 	this->t_start = timestamp();
 	pthread_mutex_unlock(&this->table->manage);
-	if (this->id % 2 == 0)
+	if (this->id % 2 == 1)
 	{
 		action(this, 3);
 		ft_usleep(10);
