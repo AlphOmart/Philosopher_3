@@ -25,7 +25,8 @@ int	thread_init(t_table *table, t_set *set)
 	int	i;
 
 	i = 0;
-	pthread_mutex_lock(&table->manage);
+	pthread_mutex_init(&table->synch, NULL);
+	pthread_mutex_lock(&table->synch);
 	while (i < set->nbr)
 	{
 		table->philo[i].last_meal = timestamp();
@@ -35,7 +36,8 @@ int	thread_init(t_table *table, t_set *set)
 		i++;
 	}
 	table->dead = false;
-	pthread_mutex_unlock(&table->manage);
+	pthread_mutex_unlock(&table->synch);
+
 	return (1);
 }
 

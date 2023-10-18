@@ -22,7 +22,6 @@ static bool	checker(t_table	*table, t_set *set)
 	enought = 0;
 	while (++i < set->nbr)
 	{
-
 		philo = &table->philo[i];
 		if ((uint_fast64_t)set->t_die < timestamp() - philo->last_meal)
 		{
@@ -35,7 +34,6 @@ static bool	checker(t_table	*table, t_set *set)
 	}
 	if (set->nbr <= enought)
 		return (0);
-
 	return (1);
 }
 
@@ -61,6 +59,7 @@ static void	ft_free(t_table *table, t_set *set)
 	i = -1;
 	while (++i < set->nbr)
 		pthread_mutex_destroy(&table->philo[i].right_fork);
+	pthread_mutex_destroy(&table->synch);
 	pthread_mutex_destroy(&table->manage);
 	free(table->philo);
 }

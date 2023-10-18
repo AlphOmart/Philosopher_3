@@ -37,9 +37,9 @@
 
 typedef struct s_set
 {
-	int 	nbr;
-	int_fast64_t		t_die;
-	int_fast64_t		t_eat;
+	int				nbr;
+	int_fast64_t	t_die;
+	int_fast64_t	t_eat;
 	int_fast64_t	t_sleep;
 	int_fast64_t	meal_max;
 }	t_set;
@@ -65,24 +65,27 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	manage;
+	pthread_mutex_t	synch;
 	bool			dead;
 }	t_table;
 
 //---ft_atoll.c
-int			is_white_space(char c);
-long long	ft_atoll(char *nbr);
+int				is_white_space(char c);
+long long		ft_atoll(char *nbr);
 
 //---parsing.c
-int			parsing(t_set *set, t_philo **philo, char **arg);
+int				parsing(t_set *set, t_philo **philo, char **arg);
 
 //---threads.c
-int			thread_init(t_table *table, t_set *set);
-int			wait_thread(t_table *table, t_set *set);
+int				thread_init(t_table *table, t_set *set);
+int				wait_thread(t_table *table, t_set *set);
 uint_fast64_t	timestamp(void);
 
 //---routine.c
-void		*routine(void *arg);
+void			*routine(void *arg);
+void			action(t_philo *this, int action);
 
 //---action.c
-void		ft_usleep(uint_fast64_t time);
+void			ft_usleep(uint_fast64_t time);
+void			solo_routine(t_philo *this);
 #endif

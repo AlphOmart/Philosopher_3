@@ -112,8 +112,8 @@ static int	init_philo(t_set *set, t_philo **philo)
 		(*philo)[i].t_die = set->t_die;
 		(*philo)[i].t_eat = set->t_eat;
 		(*philo)[i].t_sleep = set->t_sleep;
-		if (set->t_die - set->t_sleep - set->t_eat - 100 > 50)
-			(*philo)[i].t_think = set->t_die - set->t_sleep - set->t_eat - 100;
+		if (set->t_die - set->t_sleep - set->t_eat - 50 > 0)
+			(*philo)[i].t_think = set->t_die - set->t_sleep - set->t_eat - 50;
 		else
 			(*philo)[i].t_think = 0;
 		(*philo)[i].meal_nbr = 0;

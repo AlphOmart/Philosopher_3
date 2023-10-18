@@ -14,21 +14,28 @@
 
 void	ft_usleep(uint_fast64_t time)
 {
-	time *= 1000;
 	unsigned long	elapsed_usec;
-	struct timeval start, end;
-	gettimeofday(&start, NULL);
+	struct timeval	start;
+	struct timeval	end;
+	unsigned long	remaining_usec;
 
+	gettimeofday(&start, NULL);
+	time *= 1000;
 	while (1)
 	{
 		gettimeofday(&end, NULL);
-		elapsed_usec = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
+		elapsed_usec = (end.tv_sec - start.tv_sec) * \
+			1000000 + (end.tv_usec - start.tv_usec);
 		if (elapsed_usec >= time)
-			break;
-		unsigned long remaining_usec = time - elapsed_usec;
+			break ;
+		remaining_usec = time - elapsed_usec;
 		if (remaining_usec > 1000)
 			usleep(remaining_usec / 2);
 	}
 }
 
-
+void	solo_routine(t_philo *this)
+{
+	pthread_mutex_lock(this->left_fork);
+	action(this, 0);
+}
