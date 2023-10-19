@@ -57,15 +57,16 @@ typedef struct s_philo
 	int_fast64_t		t_think;
 	int					meal_nbr;
 	uint_fast64_t		last_meal;
-	uint_fast64_t		t_start;
 	struct s_table		*table;
 }	t_philo;
 
+//TODO dasdasdasd
 typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_mutex_t	manage;
 	pthread_mutex_t	synch;
+	uint_fast64_t	t_start;
 	bool			dead;
 }	t_table;
 

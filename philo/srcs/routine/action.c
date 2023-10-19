@@ -38,4 +38,5 @@ void	solo_routine(t_philo *this)
 {
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
+	pthread_mutex_unlock(this->left_fork);
 }

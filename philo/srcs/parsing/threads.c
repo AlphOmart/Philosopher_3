@@ -36,6 +36,7 @@ int	thread_init(t_table *table, t_set *set)
 		i++;
 	}
 	table->dead = false;
+	table->t_start = timestamp();
 	pthread_mutex_unlock(&table->synch);
 
 	return (1);

@@ -26,7 +26,7 @@ static bool	checker(t_table	*table, t_set *set)
 		if ((uint_fast64_t)set->t_die < timestamp() - philo->last_meal)
 		{
 			printf(DEF_PROMT"%s\n", timestamp() - \
-					philo->t_start, philo->id, DIED_MESS);
+					table->t_start, philo->id, DIED_MESS);
 			return (0);
 		}
 		if (set->meal_max > 0 && set->meal_max <= philo->meal_nbr)
@@ -49,6 +49,7 @@ static void	thread_monitoring(t_table *table, t_set *set)
 			break ;
 		}
 		pthread_mutex_unlock(&table->manage);
+		usleep(set->t_die / 2);
 	}
 }
 

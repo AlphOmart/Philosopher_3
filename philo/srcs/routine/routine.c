@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 22:42:20 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:03:07 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	action(t_philo *this, int action)
 		return (pthread_mutex_unlock(&this->table->manage), (void) NULL);
 	if (action == 0)
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->t_start, this->id, FORK_MESS);
+				this->table->t_start, this->id, FORK_MESS);
 	else if (action == 1)
 	{
 		this->last_meal = timestamp();
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->t_start, this->id, EATING_MESS);
+				this->table->t_start, this->id, EATING_MESS);
 	}
 	else if (action == 2)
 	{
 		this->meal_nbr += 1;
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->t_start, this->id, SLEEP_MESS);
+				this->table->t_start, this->id, SLEEP_MESS);
 	}
 	else
 		printf(DEF_PROMT"%s\n", timestamp() - \
-				this->t_start, this->id, THINKING_MESS);
+				this->table->t_start, this->id, THINKING_MESS);
 	pthread_mutex_unlock(&this->table->manage);
 }
 
@@ -81,11 +81,10 @@ void	*routine(void *arg)
 	t_philo	*this;
 
 	this = (t_philo *) arg;
+	pthread_mutex_lock(&this->table->synch);
+	pthread_mutex_unlock(&this->table->synch);
 	if (this->nbr == 1)
 		return (solo_routine(this), NULL);
-	pthread_mutex_lock(&this->table->synch);
-	this->t_start = timestamp();
-	pthread_mutex_unlock(&this->table->synch);
 	if (this->id % 2 == 0)
 	{
 		action(this, 3);

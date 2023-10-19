@@ -64,7 +64,7 @@ static int	is_number(char **arg)
 
 static int	is_uint(t_set *set)
 {
-	if (INT_MAX < set->nbr || set->nbr < 1)
+	if (200 < set->nbr || set->nbr < 1)
 		return (0);
 	if (INT_MAX < set->t_die || set->t_die < 1)
 		return (0);
@@ -112,7 +112,7 @@ static int	init_philo(t_set *set, t_philo **philo)
 		(*philo)[i].t_die = set->t_die;
 		(*philo)[i].t_eat = set->t_eat;
 		(*philo)[i].t_sleep = set->t_sleep;
-		if (set->t_die - set->t_sleep - set->t_eat - 50 > 0)
+		if (set->t_die - set->t_sleep - set->t_eat - 50 > 0 && set->t_die - set->t_sleep - set->t_eat - 50 < 50)
 			(*philo)[i].t_think = set->t_die - set->t_sleep - set->t_eat - 50;
 		else
 			(*philo)[i].t_think = 0;
