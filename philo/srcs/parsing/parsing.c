@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 11:53:01 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/13 15:09:12 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static int	init_philo(t_set *set, t_philo **philo)
 		if (set->t_die - set->t_sleep - set->t_eat - 50 > 0 && set->t_die - set->t_sleep - set->t_eat - 50 < 50)
 			(*philo)[i].t_think = set->t_die - set->t_sleep - set->t_eat - 50;
 		else
-			(*philo)[i].t_think = 0;
+			(*philo)[i].t_think = 5;
 		(*philo)[i].meal_nbr = 0;
 		i++;
 	}
