@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:03:54 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 22:59:35 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/19 10:35:13 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ static void	ft_free(t_table *table, t_set *set)
 	pthread_mutex_destroy(&table->synch);
 	pthread_mutex_destroy(&table->manage);
 	free(table->philo);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*this;
+
+	this = (t_philo *) arg;
+	pthread_mutex_lock(&this->table->synch);
+	pthread_mutex_unlock(&this->table->synch);
+	if (this->nbr == 1)
+		return (solo_routine(this), NULL);
+	do_routine(this);
+	pthread_mutex_unlock(&this->table->manage);
+	return (NULL);
 }
 
 int	main(int argc, char **argv)

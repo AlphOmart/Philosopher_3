@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:24:29 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 22:38:48 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/18 17:27:54 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	thread_init(t_table *table, t_set *set)
 	table->dead = false;
 	table->t_start = timestamp();
 	pthread_mutex_unlock(&table->synch);
-
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:33 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 13:04:35 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/19 13:00:46 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,4 @@ void	ft_usleep(uint_fast64_t time)
 		if (remaining_usec > 1000)
 			usleep(remaining_usec / 2);
 	}
-}
-
-void	solo_routine(t_philo *this)
-{
-	pthread_mutex_lock(this->left_fork);
-	action(this, 0);
-	pthread_mutex_unlock(this->left_fork);
 }

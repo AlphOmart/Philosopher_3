@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/10/17 22:41:47 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/19 10:36:17 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ERR_TH_INIT "\033[1;31m[ERROR]\033[1;33m thread creation failed!\n"
 # define ERR_TH_END "\033[1;31m[ERROR]\033[1;33m thread join failed!\n"
 
-# define DEF_PROMT "%ld %i "
+# define DEF_PROMT "%lu %i "
 # define FORK_MESS "has taken a fork"
 # define EATING_MESS "is eating"
 # define SLEEP_MESS "is sleeping"
@@ -60,7 +60,6 @@ typedef struct s_philo
 	struct s_table		*table;
 }	t_philo;
 
-//TODO dasdasdasd
 typedef struct s_table
 {
 	t_philo			*philo;
@@ -84,9 +83,10 @@ uint_fast64_t	timestamp(void);
 
 //---routine.c
 void			*routine(void *arg);
-void			action(t_philo *this, int action);
+void			solo_routine(t_philo *this);
+void			do_routine(t_philo *this);
 
 //---action.c
 void			ft_usleep(uint_fast64_t time);
-void			solo_routine(t_philo *this);
+
 #endif
