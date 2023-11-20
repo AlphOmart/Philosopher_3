@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/18 16:42:41 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/20 20:20:36 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,18 @@ static int	is_number(char **arg)
 
 static int	is_uint(t_set *set)
 {
-	if (200 < set->nbr || set->nbr < 1)
+	if (set->nbr < 1)
 		return (0);
 	if (INT_MAX < set->t_die || set->t_die < 1)
 		return (0);
 	if (INT_MAX < set->t_eat || set->t_eat < 1)
 		return (0);
 	if (INT_MAX < set->t_sleep || set->t_sleep < 1)
-		return (0);
+		return (0);	
+	if (set->t_die < set->t_eat)
+		set->t_eat = set->t_die - set->t_sleep + 1;
+	if (set->t_die < set->t_sleep)
+		set->t_sleep = set->t_die - set->t_eat + 1;
 	if (INT_MAX < set->meal_max || set->meal_max < -1 || set->meal_max == 0)
 		return (0);
 	return (1);
