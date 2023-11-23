@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/23 16:11:33 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:41:05 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,20 @@ static int	is_uint(t_set *set)
 	if (set->nbr < 1)
 		return (0);
 	if (INT_MAX < set->t_die || set->t_die < 1)
+	{
+		set->t_die *= 1000;
 		return (0);
+	}
 	if (INT_MAX < set->t_eat || set->t_eat < 1)
+	{
+		set->t_eat *= 1000;
 		return (0);
+	}
 	if (INT_MAX < set->t_sleep || set->t_sleep < 1)
+	{
+		set->t_sleep *= 1000;
 		return (0);
+	}
 	if (set->t_die < set->t_eat)
 		set->t_eat = (set->t_die - set->t_sleep + 1);
 	if (set->t_die < set->t_sleep)
@@ -122,13 +131,13 @@ static int	init_philo(t_set *set, t_philo **philo)
 	{
 		(*philo)[i].id = i + 1;
 		(*philo)[i].nbr = set->nbr;
-		(*philo)[i].t_die = set->t_die;
-		(*philo)[i].t_eat = set->t_eat;
-		(*philo)[i].t_sleep = set->t_sleep;
+		(*philo)[i].t_die = set->t_die * 1000;
+		(*philo)[i].t_eat = set->t_eat * 1000;
+		(*philo)[i].t_sleep = set->t_sleep * 1000;
 		if ((set->nbr % 2) == 0)
 			(*philo)[i].t_think = 0;
 		else
-			(*philo)[i].t_think = 5;
+			(*philo)[i].t_think = 5000;
 		(*philo)[i].meal_nbr = 0;
 		i++;
 	}

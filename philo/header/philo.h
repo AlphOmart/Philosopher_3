@@ -37,7 +37,7 @@
 
 typedef struct s_set
 {
-	int				nbr;
+	int64_t			nbr;
 	int64_t			t_die;
 	int64_t			t_eat;
 	int64_t			t_sleep;

@@ -105,7 +105,7 @@ void	do_routine(t_philo *this)
 	}
 	else
 	{
-		action(this, 3);
+//		action(this, 3);
 		while (42)
 		{
 			reverse_root(this);
