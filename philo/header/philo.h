@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/19 10:36:17 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:16:22 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 typedef struct s_set
 {
 	int				nbr;
-	int_fast64_t	t_die;
-	int_fast64_t	t_eat;
-	int_fast64_t	t_sleep;
-	int_fast64_t	meal_max;
+	int64_t			t_die;
+	int64_t			t_eat;
+	int64_t			t_sleep;
+	int64_t			meal_max;
 }	t_set;
 
 typedef struct s_philo
@@ -51,12 +51,14 @@ typedef struct s_philo
 	pthread_mutex_t		*left_fork;
 	int					id;
 	int					nbr;
-	int_fast64_t		t_die;
-	int_fast64_t		t_eat;
-	int_fast64_t		t_sleep;
-	int_fast64_t		t_think;
+	bool				r_fork;
+	bool				*l_fork;
+	int64_t				t_die;
+	int64_t				t_eat;
+	int64_t				t_sleep;
+	int64_t				t_think;
 	int					meal_nbr;
-	uint_fast64_t		last_meal;
+	uint64_t			last_meal;
 	struct s_table		*table;
 }	t_philo;
 

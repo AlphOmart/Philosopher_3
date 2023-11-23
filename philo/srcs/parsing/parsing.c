@@ -87,13 +87,19 @@ static int	mutex_init(t_set *set, t_philo **philo)
 
 	i = 0;
 	while (i < set->nbr)
+	{
 		if (pthread_mutex_init(&(*philo)[i++].right_fork, NULL))
 			return (0);
+		(*philo)[i++].r_fork = false;
+	}
 	i = 0;
 	while (i < set->nbr)
 	{
 		if (i != set->nbr - 1 && set->nbr != 1)
+		{
 			(*philo)[i].left_fork = &((*philo)[i + 1].right_fork);
+			(*philo)[i].l_fork = &((*philo)[i + 1].r_fork);
+		}
 		else
 			(*philo)[i].left_fork = &((*philo)[0].right_fork);
 		i++;
