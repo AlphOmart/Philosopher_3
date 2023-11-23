@@ -51,8 +51,8 @@ typedef struct s_philo
 	pthread_mutex_t		*left_fork;
 	int					id;
 	int					nbr;
-	bool				r_fork;
-	bool				*l_fork;
+//	bool				r_fork;
+//	bool				*l_fork;
 	int64_t				t_die;
 	int64_t				t_eat;
 	int64_t				t_sleep;

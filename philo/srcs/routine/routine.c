@@ -61,15 +61,15 @@ static void	reverse_root(t_philo *this)
 {
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
-	this->r_fork = true;
+//	this->r_fork = true;
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
-	*(this->l_fork) = true;
+//	*(this->l_fork) = true;
 	action(this, 1);
 	ft_usleep(this->t_eat);
-	*(this->l_fork) = false;
+//	*(this->l_fork) = false;
 	pthread_mutex_unlock(this->left_fork);
-	this->r_fork = false;
+//	this->r_fork = false;
 	pthread_mutex_unlock(&this->right_fork);
 	action(this, 2);
 	ft_usleep(this->t_sleep);
