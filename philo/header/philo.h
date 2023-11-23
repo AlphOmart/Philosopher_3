@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:50 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/23 15:16:22 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:18:26 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ uint_fast64_t	timestamp(void);
 
 //---routine.c
 void			*routine(void *arg);
-void			solo_routine(t_philo *this);
+void			alone_routine(t_philo *this);
 void			do_routine(t_philo *this);
 
 //---action.c

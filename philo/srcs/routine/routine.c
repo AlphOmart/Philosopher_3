@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 14:39:18 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/23 15:58:44 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:19:32 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ static void	base_rout(t_philo *this)
 {
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
+	*(this->l_fork) = true;
 	pthread_mutex_lock(&this->right_fork);
 	action(this, 0);
+	this->r_fork = true;
 	action(this, 1);
 	ft_usleep(this->t_eat);
+	this->r_fork = false;
 	pthread_mutex_unlock(&this->right_fork);
+	*(this->l_fork) = false;
 	pthread_mutex_unlock(this->left_fork);
 	action(this, 2);
 	ft_usleep(this->t_sleep);
@@ -77,7 +81,7 @@ static void	reverse_root(t_philo *this)
 	ft_usleep(this->t_think);
 }
 
-void	solo_routine(t_philo *this)
+void	alone_routine(t_philo *this)
 {
 	pthread_mutex_lock(this->left_fork);
 	action(this, 0);
@@ -101,6 +105,7 @@ void	do_routine(t_philo *this)
 	}
 	else
 	{
+		action(this, 3);
 		while (42)
 		{
 			reverse_root(this);

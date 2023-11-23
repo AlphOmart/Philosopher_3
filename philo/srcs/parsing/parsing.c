@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 12:27:11 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/20 20:20:36 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:11:33 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static int	is_uint(t_set *set)
 	if (INT_MAX < set->t_eat || set->t_eat < 1)
 		return (0);
 	if (INT_MAX < set->t_sleep || set->t_sleep < 1)
-		return (0);	
+		return (0);
 	if (set->t_die < set->t_eat)
-		set->t_eat = set->t_die - set->t_sleep + 1;
+		set->t_eat = (set->t_die - set->t_sleep + 1);
 	if (set->t_die < set->t_sleep)
-		set->t_sleep = set->t_die - set->t_eat + 1;
+		set->t_sleep = (set->t_die - set->t_eat + 1);
 	if (INT_MAX < set->meal_max || set->meal_max < -1 || set->meal_max == 0)
 		return (0);
 	return (1);
@@ -91,7 +91,6 @@ static int	mutex_init(t_set *set, t_philo **philo)
 		if (pthread_mutex_init(&(*philo)[i].right_fork, NULL))
 			return (0);
 		(*philo)[i++].r_fork = false;
-
 	}
 	i = 0;
 	while (i < set->nbr)
@@ -102,7 +101,10 @@ static int	mutex_init(t_set *set, t_philo **philo)
 			(*philo)[i].l_fork = &((*philo)[i + 1].r_fork);
 		}
 		else
+		{
 			(*philo)[i].left_fork = &((*philo)[0].right_fork);
+			(*philo)[i].l_fork = &((*philo)[0].r_fork);
+		}
 		i++;
 	}
 	return (1);

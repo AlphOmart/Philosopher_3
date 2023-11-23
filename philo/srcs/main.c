@@ -73,7 +73,7 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&this->table->synch);
 	pthread_mutex_unlock(&this->table->synch);
 	if (this->nbr == 1)
-		return (solo_routine(this), NULL);
+		return (alone_routine(this), NULL);
 	do_routine(this);
 	pthread_mutex_unlock(&this->table->manage);
 	return (NULL);
