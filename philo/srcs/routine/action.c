@@ -6,7 +6,7 @@
 /*   By: mwubneh <mwubneh@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:33 by mwubneh           #+#    #+#             */
-/*   Updated: 2023/11/23 16:33:43 by mwubneh          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:44:10 by mwubneh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_usleep(uint_fast64_t time)
 	unsigned long	remaining_usec;
 
 	gettimeofday(&start, NULL);
+	time *= 1000;
 	while (1)
 	{
 		gettimeofday(&end, NULL);
@@ -29,6 +30,6 @@ void	ft_usleep(uint_fast64_t time)
 			break ;
 		remaining_usec = time - elapsed_usec;
 		if (remaining_usec > 1000)
-			usleep(remaining_usec * 0.5);
+			usleep(remaining_usec / 2);
 	}
 }
